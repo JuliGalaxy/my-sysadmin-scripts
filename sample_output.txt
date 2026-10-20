@@ -1,0 +1,13 @@
+--- 2026-10-20 13:48:43 ---
+               total        used        free      shared  buff/cache   available
+Mem:            21Gi       1.0Gi        19Gi       2.0Mi       1.0Gi        20Gi
+Swap:           11Gi          0B        11Gi
+Filesystem                 Size  Used Avail Use% Mounted on
+devtmpfs                   4.0M     0  4.0M   0% /dev
+tmpfs                       11G     0   11G   0% /dev/shm
+tmpfs                      4.3G  2.8M  4.3G   1% /run
+/dev/mapper/ro_redos-root   97G  4.5G   88G   5% /
+/dev/sda1                  974M  163M  744M  18% /boot
+tmpfs                      2.2G     0  2.2G   0% /run/user/1000
+ 13:48:43 up 5 min,  2 users,  load average: 0.07, 0.34, 0.21
+
