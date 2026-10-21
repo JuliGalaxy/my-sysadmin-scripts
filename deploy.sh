@@ -23,6 +23,16 @@ docker create \
 install -D -m 0644 "$REPO_DIR/systemd/my-app.service" /etc/systemd/system/my-app.service
 install -D -m 0644 "$REPO_DIR/nginx/my-app.conf" /etc/nginx/conf.d/my-app.conf
 
+# В RED OS стандартный server-блок находится прямо в nginx.conf и перехватывает
+# HTTP-запросы. Сохраняем исходник и отключаем только этот демонстрационный блок.
+if grep -q '^    server {$' /etc/nginx/nginx.conf \
+  && grep -q 'root[[:space:]]*/usr/share/nginx/html' /etc/nginx/nginx.conf; then
+  if [ ! -f /etc/nginx/nginx.conf.before-my-app ]; then
+    cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.before-my-app
+  fi
+  sed -i '/^    server {$/,/^    }$/ s/^/# disabled-by-my-app: /' /etc/nginx/nginx.conf
+fi
+
 mkdir -p /etc/ssl/private /etc/ssl/certs
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
   -keyout /etc/ssl/private/my-app.key \
