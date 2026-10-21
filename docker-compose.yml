@@ -1,0 +1,10 @@
+services:
+  app:
+    build: .
+    image: my-script:latest
+    container_name: my-app
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - /mnt/logs:/var/www
+    restart: unless-stopped
