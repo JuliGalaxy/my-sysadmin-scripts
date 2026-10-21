@@ -23,6 +23,7 @@ docker create \
 install -D -m 0644 "$REPO_DIR/systemd/my-app.service" /etc/systemd/system/my-app.service
 install -D -m 0644 "$REPO_DIR/nginx/my-app.conf" /etc/nginx/conf.d/my-app.conf
 
+mkdir -p /etc/ssl/private /etc/ssl/certs
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
   -keyout /etc/ssl/private/my-app.key \
   -out /etc/ssl/certs/my-app.crt \
