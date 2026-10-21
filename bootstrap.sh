@@ -10,9 +10,15 @@ REPO_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 
 if command -v apt-get >/dev/null 2>&1; then
   apt-get update
-  DEBIAN_FRONTEND=noninteractive apt-get install -y docker.io nginx mdadm lvm2 openssl curl
+  DEBIAN_FRONTEND=noninteractive apt-get install -y nginx mdadm lvm2 openssl curl
+  if ! command -v docker >/dev/null 2>&1; then
+    DEBIAN_FRONTEND=noninteractive apt-get install -y docker.io
+  fi
 elif command -v dnf >/dev/null 2>&1; then
-  dnf install -y docker nginx mdadm lvm2 openssl curl
+  dnf install -y nginx mdadm lvm2 openssl curl
+  if ! command -v docker >/dev/null 2>&1; then
+    dnf install -y docker-ce
+  fi
 else
   echo "Поддерживаются системы с apt-get или dnf." >&2
   exit 1
